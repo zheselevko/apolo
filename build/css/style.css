@@ -2398,11 +2398,25 @@ html { -webkit-box-sizing: border-box; box-sizing: border-box; }
 body { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; min-height: 100vh; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; }
 
 @font-face { font-family: mSemiBold; src: url("fonts/MONO-RGOMODULAR-SemiBold.woff") format("woff"); font-weight: normal; font-style: normal; }
+@font-face { font-family: PFBeauSansPro-Regular; src: url("fonts/PFBeauSansPro-Regular.woff") format("woff"); font-weight: normal; font-style: normal; }
+@font-face { font-family: PFBeauSansPro-SemiBold; src: url("fonts/PFBeauSansPro-SemiBold.woff") format("woff"); font-weight: normal; font-style: normal; }
+@font-face { font-family: Roboto-Regular; src: url("fonts/Roboto-Regular.woff") format("woff"); font-weight: normal; font-style: normal; }
+.h3 { color: #f1f1f1; font-family: PFBeauSansPro-Regular; font-size: 44px; font-weight: 100; line-height: 46px; }
+
 .out { -webkit-box-flex: 1; -webkit-flex: 1 0 auto; -ms-flex: 1 0 auto; flex: 1 0 auto; }
 
 footer.page-footer { background-color: #141414; }
+footer.page-footer p { color: #525252; font-family: PFBeauSansPro-Regular; font-size: 18px; font-weight: 400; line-height: 24px; margin: 30px 0 50px 0; }
+footer.page-footer .sub-heading { font-family: mSemiBold; color: #525252; font-size: 14px; font-weight: 600; line-height: 46px; display: block; }
+footer.page-footer .city { color: white; font-family: PFBeauSansPro-SemiBold; font-size: 18px; font-weight: 600; line-height: 30px; display: block; }
+footer.page-footer .street { font-family: Roboto-Regular; font-weight: 400; color: #a3a3a3; font-size: 14px; font-weight: 400; display: inline-block; }
 footer.page-footer .footer-copyright { background: #262626; padding: 29px 0; }
-footer.page-footer .footer-copyright span { font-size: 14px; font-family: mSemiBold; }
+footer.page-footer .footer-copyright span { font-size: 14px; font-family: mSemiBold; color: #c1c1c1; font-weight: 600; line-height: 2.2rem; }
+footer.page-footer .instagram { width: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; *zoom: 1; }
+footer.page-footer .instagram:after { content: " "; display: table; clear: both; }
+footer.page-footer .instagram .row { margin-bottom: 0; }
+footer.page-footer .instagram .item { float: left; width: 12.45%; overflow: hidden; *zoom: 1; -webkit-box-sizing: border-box; box-sizing: border-box; }
+footer.page-footer .instagram .item:after { content: " "; display: table; clear: both; }
 @media only screen and (min-width: 601px) and (max-width: 992px){
  #toast-container{ left: 5%; bottom: 7%; max-width: 90%; }
  .toast{ float: left; } }
