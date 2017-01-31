@@ -2397,10 +2397,12 @@ html { -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 body { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; min-height: 100vh; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; }
 
+@font-face { font-family: mSemiBold; src: url("fonts/MONO-RGOMODULAR-SemiBold.woff") format("woff"); font-weight: normal; font-style: normal; }
 .out { -webkit-box-flex: 1; -webkit-flex: 1 0 auto; -ms-flex: 1 0 auto; flex: 1 0 auto; }
 
 footer.page-footer { background-color: #141414; }
 footer.page-footer .footer-copyright { background: #262626; padding: 29px 0; }
+footer.page-footer .footer-copyright span { font-size: 14px; font-family: mSemiBold; }
 @media only screen and (min-width: 601px) and (max-width: 992px){
  #toast-container{ left: 5%; bottom: 7%; max-width: 90%; }
  .toast{ float: left; } }
