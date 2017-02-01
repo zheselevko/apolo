@@ -2384,6 +2384,10 @@ html { -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 *, *:before, *:after { -webkit-box-sizing: inherit; box-sizing: inherit; }
 
+.icon-instagram { width: 22px; height: 22px; background-image: url("../img/icons.png"); background-position: 0px 0px; }
+
+.icon-vk { width: 22px; height: 12px; background-image: url("../img/icons.png"); background-position: 0px -26px; }
+
 @font-face { font-family: "svgfont"; src: url("fonts/svgfont.eot"); src: url("fonts/svgfont.eot?#iefix") format("eot"), url("fonts/svgfont.woff") format("woff"), url("fonts/svgfont.woff2") format("woff2"), url("fonts/svgfont.ttf") format("truetype"); font-weight: normal; font-style: normal; }
 .icon, [class^="icon-"], [class*=" icon-"] { font-family: "svgfont"; font-style: normal; font-weight: normal; text-rendering: auto; speak: none; line-height: 1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
@@ -2401,7 +2405,11 @@ body { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; displa
 @font-face { font-family: PFBeauSansPro-Regular; src: url("fonts/PFBeauSansPro-Regular.woff") format("woff"); font-weight: normal; font-style: normal; }
 @font-face { font-family: PFBeauSansPro-SemiBold; src: url("fonts/PFBeauSansPro-SemiBold.woff") format("woff"); font-weight: normal; font-style: normal; }
 @font-face { font-family: Roboto-Regular; src: url("fonts/Roboto-Regular.woff") format("woff"); font-weight: normal; font-style: normal; }
+@font-face { font-family: MONO-RGOMODULAR-Regular; src: url("fonts/MONO-RGOMODULAR-Regular.woff") format("woff"); font-weight: normal; font-style: normal; }
+@font-face { font-family: PFBeauSansPro-Bbook; src: url("fonts/PFBeauSansPro-Bbook.woff") format("woff"); font-weight: normal; font-style: normal; }
 .h3 { color: #f1f1f1; font-family: PFBeauSansPro-Regular; font-size: 44px; font-weight: 100; line-height: 46px; }
+
+.nb { margin-bottom: 0; }
 
 .out { -webkit-box-flex: 1; -webkit-flex: 1 0 auto; -ms-flex: 1 0 auto; flex: 1 0 auto; }
 
@@ -2410,6 +2418,13 @@ footer.page-footer p { color: #525252; font-family: PFBeauSansPro-Regular; font-
 footer.page-footer .sub-heading { font-family: mSemiBold; color: #525252; font-size: 14px; font-weight: 600; line-height: 46px; display: block; }
 footer.page-footer .city { color: white; font-family: PFBeauSansPro-SemiBold; font-size: 18px; font-weight: 600; line-height: 30px; display: block; }
 footer.page-footer .street { font-family: Roboto-Regular; font-weight: 400; color: #a3a3a3; font-size: 14px; font-weight: 400; display: inline-block; }
+footer.page-footer .label { color: #525252; font-family: mSemiBold; font-size: 14px; font-weight: 600; line-height: 46px; display: inline-block; }
+footer.page-footer .phone { font-family: MONO-RGOMODULAR-Regular; color: #fdfdfd; font-size: 22px; font-weight: 400; line-height: 2.5rem; }
+footer.page-footer .email { font-family: PFBeauSansPro-Bbook; color: #02a2db; font-size: 14px; font-weight: 300; line-height: 3.2rem; }
+footer.page-footer .social { display: inline-block; position: relative; width: 42px; height: 42px; margin-right: 15px; border: 2px solid white; border-radius: 50%; }
+footer.page-footer .social:hover { border: 2px solid #3d6092; }
+footer.page-footer .social .icon-vk { position: absolute; top: 50%; margin-top: -6px; left: 50%; margin-left: -11px; }
+footer.page-footer .social .icon-instagram { position: absolute; top: 50%; margin-top: -11px; left: 50%; margin-left: -11px; }
 footer.page-footer .footer-copyright { background: #262626; padding: 29px 0; }
 footer.page-footer .footer-copyright span { font-size: 14px; font-family: mSemiBold; color: #c1c1c1; font-weight: 600; line-height: 2.2rem; }
 footer.page-footer .instagram { width: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; *zoom: 1; }

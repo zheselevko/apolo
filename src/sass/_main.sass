@@ -2,6 +2,8 @@ $mSemiBold: mSemiBold
 $PFBeauSansPro-Regular: PFBeauSansPro-Regular
 $PFBeauSansPro-SemiBold: PFBeauSansPro-SemiBold
 $Roboto-Regular: Roboto-Regular
+$MONO-RGOMODULAR-Regular: MONO-RGOMODULAR-Regular
+$PFBeauSansPro-Bbook: PFBeauSansPro-Bbook
 .out
 	flex: 1 0 auto
 footer.page-footer
@@ -34,6 +36,47 @@ footer.page-footer
 		font-size: 14px
 		font-weight: 400
 		display: inline-block
+	.label
+		color: #525252
+		font-family: $mSemiBold
+		font-size: 14px
+		font-weight: 600
+		line-height: 46px
+		display: inline-block
+	.phone
+		font-family: $MONO-RGOMODULAR-Regular
+		color: #fdfdfd
+		font-size: 22px
+		font-weight: 400	
+		line-height: 2.5rem
+	.email
+		font-family: $PFBeauSansPro-Bbook
+		color: #02a2db
+		font-size: 14px
+		font-weight: 300	
+		line-height: 3.2rem
+	.social
+		display: inline-block
+		position: relative
+		width: 42px
+		height: 42px
+		margin-right: 15px
+		border: 2px solid white
+		+circle
+		&:hover
+			border: 2px solid #3d6092
+		.icon-vk
+			position: absolute
+			top: 50%
+			margin-top: -6px
+			left: 50%
+			margin-left: -11px
+		.icon-instagram
+			position: absolute
+			top: 50%
+			margin-top: -11px
+			left: 50%
+			margin-left: -11px
 	.footer-copyright
 		background: #262626
 		padding: 29px 0
