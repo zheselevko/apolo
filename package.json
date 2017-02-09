@@ -28,5 +28,8 @@
     "postcss-svg": "~1.0.6",
     "require-dir": "~0.3.0",
     "rimraf": "~2.5.2"
+  },
+  "dependencies": {
+    "preloader.css3": "^1.0.2"
   }
 }

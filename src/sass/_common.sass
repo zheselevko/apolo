@@ -40,33 +40,44 @@ body
 	display: flex
 	min-height: 100vh
 	flex-direction: column
+	-webkit-font-smoothing: antialiased !important
+	-webkit-backface-visibility: hidden
+	-moz-backface-visibility:    hidden
+	-ms-backface-visibility:     hidden
+	-webkit-font-smoothing: antialiased
+	-moz-osx-font-smoothing: grayscale
 
 
 +font(mSemiBold, MONO-RGOMODULAR-SemiBold)
 // and create mixin
 =mSemiBold
-	font-family: "mSemiBold", sans-serif
+	font-family: "mSemiBold", Arial, sans-serif
 +font(PFBeauSansPro-Regular, PFBeauSansPro-Regular)
 // and create mixin
 =PFBeauSansPro-Regular
-	font-family: "PFBeauSansPro-Regular", sans-serif
+	font-family: "PFBeauSansPro-Regular", Arial, sans-serif
 $PFBeauSansPro-Regular: PFBeauSansPro-Regular
 +font(PFBeauSansPro-SemiBold, PFBeauSansPro-SemiBold)
 // and create mixin
 =PFBeauSansPro-SemiBold
-	font-family: "PFBeauSansPro-SemiBold", sans-serif
+	font-family: "PFBeauSansPro-SemiBold", Arial, sans-serif
 +font(Roboto-Regular, Roboto-Regular)
 // and create mixin
 =Roboto-Regular
-	font-family: "Roboto-Regular", sans-serif
+	font-family: "Roboto-Regular", Arial, sans-serif
 +font(MONO-RGOMODULAR-Regular, MONO-RGOMODULAR-Regular)
 // and create mixin
 =MONO-RGOMODULAR-Regular
-	font-family: "MONO-RGOMODULAR-Regular", sans-serif
+	font-family: "MONO-RGOMODULAR-Regular", Arial, sans-serif
 +font(PFBeauSansPro-Bbook, PFBeauSansPro-Bbook)
 // and create mixin
 =PFBeauSansPro-Bbook
-	font-family: "PFBeauSansPro-Bbook", sans-serif
+	font-family: "PFBeauSansPro-Bbook", Arial, sans-serif
+
++font(PFBeauSansPro-Thin, PFBeauSansPro-Thin)
+// and create mixin
+=PFBeauSansPro-Thin
+	font-family: "PFBeauSansPro-Thin", Arial, sans-serif
 
 
 .h3

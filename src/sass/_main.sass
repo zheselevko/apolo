@@ -4,19 +4,608 @@ $PFBeauSansPro-SemiBold: PFBeauSansPro-SemiBold
 $Roboto-Regular: Roboto-Regular
 $MONO-RGOMODULAR-Regular: MONO-RGOMODULAR-Regular
 $PFBeauSansPro-Bbook: PFBeauSansPro-Bbook
+$PFBeauSansPro-Thin: PFBeauSansPro-Thin
 .out
 	flex: 1 0 auto
+	+clr
+.header
+	+box
+	+clr
+	position: relative
+	height: auto
+	background: rgba(20,20,20,0.86)
+	overflow: hidden
+	.button
+		margin: 1rem 0 0 0
+	.header__top
+		+box
+		border-bottom: 2px solid rgba(255,255,255,0.06)
+		.container
+			padding: 40px 0 41px 0	
+			nav
+				background-color: transparent
+				height: auto
+				line-height: 18px
+				li
+					a
+						color: rgba(253,253,253,0.32)
+						+Roboto-Regular
+						font-size: 16px
+						font-weight: 400
+						padding: 0 22px
+						-moz-transition: all .2s ease-in
+						-o-transition: all .2s ease-in
+						-webkit-transition: all .2s ease-in
+						transition: all .2s ease-in
+						&:hover
+							color: #02a2db
+							background: none
+			.row
+				margin-bottom: 0
+				.category
+					color: white
+					+mSemiBold
+					font-size: 14px
+					font-weight: 600
+					display: inline-block
+					padding: 0px 0px 10px 12px
+				.category-soft
+					padding: 0px 0px 10px 23px
+					color: white
+					+mSemiBold
+					font-size: 14px
+					font-weight: 600
+					display: inline-block
+				.email
+					color: #02a2db
+					+PFBeauSansPro-Bbook
+					line-height: 1
+					font-size: 14px
+					font-weight: 300
+					margin-left: 22px
+					&:after
+						top: 1px
+				.tel
+					color: #fdfdfd
+					+MONO-RGOMODULAR-Regular
+					font-size: 22px
+					font-weight: 400
+					line-height: 1
+		.icon-logo
+			background: url("../img/appollo_logo_full.svg") 0 0 no-repeat
+			background-size: 200px 36px
+			width: 200px
+			height: 36px
+
+	#bgvideo
+		position: absolute
+		z-index: -1
+		top: 0
+		left: 0
+		right: 0
+		bottom: 0
+	.header__bottom
+		+box
+		+clr
+		padding: 185px 0
+		span
+			display: block
+		.h1
+			color: white
+			+PFBeauSansPro-Thin
+			font-size: 44px
+			font-weight: 100
+			line-height: 60px
+		.sub-title
+			color: rgba(255,255,255,0.5)
+			+PFBeauSansPro-Thin
+			font-size: 22px
+			font-weight: 100
+			line-height: 60px
+	+r(480)
+		.header__bottom
+			padding: 165px 0
+			.h1
+				color: white
+				+PFBeauSansPro-Thin
+				font-size: 22px
+				font-weight: 100
+	.header-fixed__top
+		position: relative
+		z-index: 13
+		background-color: #0c0c0c
+		+box
+		+clr
+		.right
+			a
+				margin-right: 15px
+		.email
+			color: #02a2db
+			+PFBeauSansPro-Bbook
+			line-height: 1
+			font-size: 14px
+			font-weight: 300
+			margin-left: 22px
+			display: inline-block
+			vertical-align: middle
+			margin-top: 5px
+			&:after
+				top: 0px
+		.tel
+			color: #fdfdfd
+			+MONO-RGOMODULAR-Regular
+			font-size: 22px
+			font-weight: 400
+			line-height: 1
+			display: inline-block
+			vertical-align: top
+		.container
+			padding: 24px 0 24px 0
+			.header-menu-link
+				color: #fff
+				display: inline-block
+				cursor: pointer
+				vertical-align: top
+				font-size: 28px
+			.logo
+				display: inline-block
+				vertical-align: top
+				cursor: pointer
+				margin-left: 25px
+
+	.nav
+		-webkit-transition: all 0.3s ease 0s
+		position: relative
+		transition: all 0.3s ease 0s
+		margin-top: -64px
+		height: auto
+		z-index: 2
+		background-color: #0c0c0c
+		line-height: 64px
+		li
+			a
+				color: rgba(253,253,253,0.32)
+				+Roboto-Regular
+				font-size: 16px
+				font-weight: 400
+				padding: 0 29px
+				-moz-transition: all .2s ease-in
+				-o-transition: all .2s ease-in
+				-webkit-transition: all .2s ease-in
+				transition: all .2s ease-in
+				&:hover
+					color: #02a2db
+					background: none
+	.nav.active
+		margin-top: 0
+	.header-fixed
+		+box
+		+clr
+		.row
+			margin-bottom: 0
+	.header-fixed.active
+		+box
+		+clr
+				
+
+		
+
+.clients
+	+box
+	+clr
+	padding: 100px 0
+	.col.l12
+		width: 100%
+	.cnt
+		display: inline-block
+		cursor: pointer
+		float: left
+		width: 50%
+		height: 100%
+		position: relative
+	.prev-c
+		&:before
+			content: ''
+			position: absolute
+			left: 50%
+			margin-left: -2px
+			top: 50%
+			margin-top: -4px
+			width: 4px
+			height: 8px
+			background: url(../img/arr-l.png) 0 0 no-repeat
+	.next-c
+		&:before
+			content: ''
+			position: absolute
+			left: 50%
+			margin-left: -2px
+			top: 50%
+			margin-top: -4px
+			width: 4px
+			height: 8px
+			+rotate(180)
+			background: url(../img/arr-l.png) 0 0 no-repeat
+	.buttons
+		width: 64px
+		height: 32px
+		border: 2px solid #f1f1f1
+		border-radius: 6px
+		position: relative
+		&:before
+			content: ''
+			position: absolute
+			left: 50%
+			margin-left: -1px
+			top: 0
+			bottom: 0
+			width: 2px
+			background: #f1f1f1
+	.h3
+		color: #262626
+		+PFBeauSansPro-Thin
+		font-size: 44px
+		font-weight: 100
+		line-height: 46px
+		display: inline-block
+	.sub-title
+		margin: 10px 0
+		color: #a3a3a3
+		+PFBeauSansPro-Regular
+		font-size: 18px
+		font-weight: 400
+		line-height: 46px
+	.clients-slide
+		.item
+			width: 180px
+			height: 80px
+			border: 2px solid #f6f6f6
+			border-radius: 8px
+			.img
+				height: 80px
+		.slick-slide img
+			display: inline-block
+			margin: 0 auto
+		.slick-slide
+			margin: 0 12px
+.portfolio
+	+box
+	+clr
+	background-color: #f6f6f6
+	padding: 100px 0
+	.col
+		padding: 0 1.37rem
+	.card
+		+box
+		+clr
+		background: #fff
+		border-radius: 8px
+		margin-bottom: 20px
+		.link
+			+box
+			+clr
+			padding: 30px 35px 35px 35px
+			a
+				+Roboto-Regular
+				font-size: 16px
+				font-weight: 400
+				line-height: 24px
+				color: #464646
+				-webkit-transition: all 0.2s ease-in
+				transition: all 0.2s ease-in
+				&:hover
+					color: #02a2db
+		.image
+			position: relative
+			span
+				position: relative
+				z-index: 1
+				display: inline-block
+				border-radius: 3px
+				+mSemiBold
+				font-size: 14px
+				font-weight: 600
+				padding: 10px
+				top: 15px
+				margin-right: 20px
+			.hard
+				background-color: #fc291c
+				color: white
+				left: 15px
+			.soft
+				background-color: white
+				color: #fc291c
+			img
+				position: relative
+				margin-top: -40px
+				width: 100%
+			iframe
+				margin-top: -40px
+				position: relative
+		.info
+			padding: 0 15px 35px 15px
+			height: 50px
+			span.info-date
+				color: #c1c1c1
+				+PFBeauSansPro-SemiBold
+				font-size: 13px
+				font-weight: 600
+			span.date
+				color: #525252
+				+mSemiBold
+				font-size: 16px
+				font-weight: 600
+	.h3
+		color: #262626
+		+PFBeauSansPro-Thin
+		font-size: 44px
+		font-weight: 100
+		line-height: 46px
+		display: inline-block
+	.sub-title
+		margin: 10px 0
+		color: #a3a3a3
+		+PFBeauSansPro-Regular
+		font-size: 18px
+		font-weight: 400
+		line-height: 46px
+	.btn
+		background: none
+		box-shadow: none
+		border: 2px solid #c1c1c1
+		border-radius: 8px
+		color: #525252
+		+PFBeauSansPro-SemiBold
+		font-size: 16px
+		font-weight: 600
+		height: 60px
+		margin: 15px 0
+		position: relative
+		z-index: 1
+		text-transform: none
+	// .card
+	// 	+box
+	// 	margin: 0
+.request
+	padding: 100px 0
+	.form
+		background-color: #f6f6f6
+		border-radius: 10px
+		padding: 50px 50px 30px 50px
+		+box
+		+clr
+		.row
+			margin-bottom: 0
+		.waves-input-wrapper
+			width: 100%
+		.icon, [class^="icon-"], [class*=" icon-"]
+			color: #c1c1c1
+			position: absolute
+			left: 15px
+		.icon-user_icon
+			font-size: 24px
+			margin-top: 15px
+		.icon-phone_icon
+			font-size: 24px
+			margin-top: 15px
+		.icon-mail_icon
+			font-size: 24px
+			margin-top: 15px
+		.prefix.active
+			color: #02a2db
+		.input__label-content
+			color: #c1c1c1
+			+Roboto-Regular
+			font-size: 16px
+			font-weight: 400
+			line-height: 4rem
+			padding: 0
+			vertical-align: top
+
+			margin-left: 40px	
+		.input--filled
+			.icon, [class^="icon-"], [class*=" icon-"]
+				color: #02a2db
+		input
+			color: #262626
+			+Roboto-Regular
+			font-size: 16px
+			font-weight: 400
+		textarea
+			height: 100px
+			background-color: white
+			border-radius: 6px
+			color: #262626
+			+Roboto-Regular
+			border: 1px solid transparent
+			padding: 20px 20px
+			width: 100%
+			font-size: 16px
+			font-weight: 400
+			+box
+			::-webkit-input-placeholder
+				color: #c1c1c1
+			::-moz-placeholder
+				color: #c1c1c1
+			:-ms-input-placeholder
+				color: #c1c1c1
+			:-o-input-placeholder
+				color: #c1c1c1
+		button
+			height: 60px
+			background-color: #fc291c
+			border-radius: 8px
+			width: 100%
+			border: none
+			color: white
+			+PFBeauSansPro-Thin
+			font-size: 16px
+			font-weight: 600
+			margin: 0
+			min-width: 100%
+			max-width: 100%
+			+box
+			&:hover
+				color: #fc291c
+			&:before
+				border-color: #fc291c
+		.input__field
+			border: 1px solid transparent
+			background-color: white
+			border-radius: 6px
+			// padding: 0 55px
+			height: 56px
+			+box
+			margin: 0 0 0px 0
+			width: 100%
+		input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea:focus:not([readonly])
+			box-shadow: none
+			border: 1px solid #02a2db
+		.input__label.active
+			.icon
+				color: #02a2db
+		.h3
+			color: #262626
+			+PFBeauSansPro-Thin
+			font-size: 30px
+			font-weight: 100
+			line-height: 46px
+			display: block
+			text-align: center
+			margin-bottom: 22px
+	.h3
+		+PFBeauSansPro-Thin
+		color: #525252
+		font-size: 44px
+		font-weight: 100
+		line-height: 46px
+		display: inline-block
+	p
+		color: #c1c1c1
+		+PFBeauSansPro-Regular
+		font-size: 18px
+		font-weight: 400
+		line-height: 26px
+		padding: 20px 0 50px 0
+	.sm
+		color: #525252
+		font-size: 30px
+		font-weight: 100
+		line-height: 46px
+		margin-bottom: 30px
+	.list
+		+box
+		+clr
+		.item
+			+box
+			+clr
+			position: relative
+			margin-bottom: 35px
+			.item__content
+				+box
+				+clr
+				padding-left: 125px
+				padding-top: 12px
+				.item__name
+					color: #141414
+					+PFBeauSansPro-SemiBold
+					font-size: 18px
+					font-weight: 600
+					line-height: 30px
+				.item__text
+					color: #c1c1c1
+					+Roboto-Regular
+					font-size: 16px
+					font-weight: 400
+					line-height: 18px
+			.icon, [class^="icon-"], [class*=" icon-"]
+				position: absolute
+				color: #a3a3a3
+			.icon-agency_icon
+				font-size: 78px
+			.icon-client_icon
+				font-size: 63px
+			.icon-production_icon
+				font-size: 76px
+.reviews
+	+box
+	+clr
+	background-color: #f6f6f6
+	padding: 60px 0 0 0
+	.col.l12
+		width: 100%
+	.slick-slider
+		+box
+		+clr
+	.slick-slide
+		text-align: center
+		+box
+		+clr
+		padding: 40px 0 50px 0
+		&:before
+			content: ''
+			position: absolute
+			top: 0
+			left: 50%
+			margin-left: -21px
+			width: 42px
+			height: 35px
+			background: url("../img/quote.png") 0 0 no-repeat
+		p
+			padding: 40px 0 30px 0
+			color: #525252
+			+Roboto-Regular
+			font-size: 16px
+			font-weight: 400
+		span
+			display: block
+		.name
+			color: #141414
+			+PFBeauSansPro-SemiBold
+			font-size: 18px
+			font-weight: 600
+			line-height: 30px
+		.role
+			color: #c1c1c1
+			+MONO-RGOMODULAR-Regular
+			font-size: 14px
+			font-weight: 600
+			line-height: 46px
+	.slick-list
+		margin: 0 95px
+		+box
+		+clr
 footer.page-footer
 	background-color: #141414
+	#map
+		background: url("../img/map.png") 0 0 no-repeat
+		height: 590px
+		position: relative
+		right: -44.3%
+		.pin
+			i
+				color: #fc291c
+				font-size: 40px
+				cursor: pointer
+		#pin-1
+			position: absolute
+			top: 147px
+			left: 36px
+		#pin-2
+			position: absolute
+			top: 224px
+			left: 171px
 	p
 		color: #525252
-		font-family: $PFBeauSansPro-Regular
+		+PFBeauSansPro-Regular
 		font-size: 18px
 		font-weight: 400
 		line-height: 24px
 		margin: 30px 0 50px 0
+	#street-2, #street-1
+		cursor: pointer
 	.sub-heading
-		font-family: $mSemiBold
+		+mSemiBold
 		color: #525252
 		font-size: 14px
 		font-weight: 600
@@ -24,37 +613,42 @@ footer.page-footer
 		display: block
 	.city
 		color: white
-		font-family: $PFBeauSansPro-SemiBold
+		+PFBeauSansPro-SemiBold
 		font-size: 18px
 		font-weight: 600
 		line-height: 30px
 		display: block
+		cursor: pointer
 	.street
-		font-family: $Roboto-Regular
+		+Roboto-Regular
 		font-weight: 400
 		color: #a3a3a3
 		font-size: 14px
 		font-weight: 400
 		display: inline-block
+		cursor: pointer
 	.label
 		color: #525252
-		font-family: $mSemiBold
+		+mSemiBold
 		font-size: 14px
 		font-weight: 600
 		line-height: 46px
 		display: inline-block
 	.phone
-		font-family: $MONO-RGOMODULAR-Regular
+		+MONO-RGOMODULAR-Regular
 		color: #fdfdfd
 		font-size: 22px
 		font-weight: 400	
 		line-height: 2.5rem
 	.email
-		font-family: $PFBeauSansPro-Bbook
-		color: #02a2db
+		+PFBeauSansPro-Bbook
 		font-size: 14px
 		font-weight: 300	
-		line-height: 3.2rem
+		position: relative
+		color: #02a2db
+		line-height: 1
+		display: inline-block
+		margin-top: 15px
 	.social
 		display: inline-block
 		position: relative
@@ -65,6 +659,7 @@ footer.page-footer
 		+circle
 		&:hover
 			border: 2px solid #3d6092
+
 		.icon-vk
 			position: absolute
 			top: 50%
@@ -77,12 +672,24 @@ footer.page-footer
 			margin-top: -11px
 			left: 50%
 			margin-left: -11px
+		.icon-facebook
+			position: absolute
+			left: 50%
+			margin-left: -5px
+			top: 50%
+			margin-top: -9px
+	.social.insta
+		&:hover
+			border: 2px solid #bc168b
+	.social.facebook
+		&:hover
+			border: 2px solid #303aa5
 	.footer-copyright
 		background: #262626
 		padding: 29px 0
 		span
 			font-size: 14px
-			font-family: $mSemiBold
+			+mSemiBold
 			color: #c1c1c1
 			font-weight: 600	
 			line-height: 2.2rem
@@ -94,8 +701,29 @@ footer.page-footer
 		.row
 			margin-bottom: 0
 		.item
-			float: left
-			width: 12.45%
-			overflow: hidden
-			+clr
-			+box
+			text-align: center
+		+rm(991)
+			.item
+				float: left
+				width: 12.45%
+				overflow: hidden
+				+clr
+				+box
+.t40
+	margin-top: 90px
+	margin-bottom: 80px
+.header-mobile
+	display: none
+.mobile .header-fixed, .mobile #map, .mobile .header__top
+	display: none
+.mobile
+	.header-mobile
+		display: block
+		position: fixed
+		left: 0
+		right: 0
+		top: 0
+		z-index: 1000
+	.header-mobile__main
+		height: 64px
+		background-color: #0c0c0c
