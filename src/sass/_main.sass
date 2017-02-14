@@ -22,6 +22,9 @@ $PFBeauSansPro-Thin: PFBeauSansPro-Thin
 		border-bottom: 2px solid rgba(255,255,255,0.06)
 		.container
 			padding: 40px 0 41px 0	
+			+r(1024)
+				.l9
+					width: 100%
 			nav
 				background-color: transparent
 				height: auto
@@ -40,6 +43,14 @@ $PFBeauSansPro-Thin: PFBeauSansPro-Thin
 						&:hover
 							color: #02a2db
 							background: none
+					+r(1280)
+						a
+							padding: 0 15px
+					+r(768)
+						a
+							padding: 0 7px
+					
+
 			.row
 				margin-bottom: 0
 				.category
@@ -84,10 +95,13 @@ $PFBeauSansPro-Thin: PFBeauSansPro-Thin
 		left: 0
 		right: 0
 		bottom: 0
+	+rm(1680)
+		.header__bottom
+			padding: 185px	0
 	.header__bottom
 		+box
 		+clr
-		padding: 185px 0
+		padding: 75px 0
 		span
 			display: block
 		.h1
@@ -110,6 +124,9 @@ $PFBeauSansPro-Thin: PFBeauSansPro-Thin
 				+PFBeauSansPro-Thin
 				font-size: 22px
 				font-weight: 100
+	+r(768)
+		.header__bottom
+			padding: 139px 0
 	.header-fixed__top
 		position: relative
 		z-index: 13
@@ -176,6 +193,18 @@ $PFBeauSansPro-Thin: PFBeauSansPro-Thin
 				&:hover
 					color: #02a2db
 					background: none
+			+r(1280)
+				a
+					padding: 0 15px
+			+r(768)
+				a
+					padding: 0 5px
+					font-size: 11px
+			+r(1024)
+				a
+					font-size: 14px
+					padding: 0 5px
+
 	.nav.active
 		margin-top: 0
 	.header-fixed
@@ -273,8 +302,9 @@ $PFBeauSansPro-Thin: PFBeauSansPro-Thin
 	+clr
 	background-color: #f6f6f6
 	padding: 100px 0
-	.col
-		padding: 0 1.37rem
+	+rm(991)
+		.col
+			padding: 0 1.37rem
 	.card
 		+box
 		+clr
@@ -349,6 +379,8 @@ $PFBeauSansPro-Thin: PFBeauSansPro-Thin
 		font-size: 18px
 		font-weight: 400
 		line-height: 46px
+	.inner
+		line-height: 20px
 	.btn
 		background: none
 		box-shadow: none
@@ -577,6 +609,12 @@ $PFBeauSansPro-Thin: PFBeauSansPro-Thin
 		+clr
 footer.page-footer
 	background-color: #141414
+	+r(1280)
+		.l8
+			overflow: hidden
+	+r(768)
+		#map
+			display: none
 	#map
 		background: url("../img/map.png") 0 0 no-repeat
 		height: 590px
@@ -714,16 +752,251 @@ footer.page-footer
 	margin-bottom: 80px
 .header-mobile
 	display: none
-.mobile .header-fixed, .mobile #map, .mobile .header__top
+.mobile .header-fixed, .mobile #map, .mobile .header__top, .tablet .header__top, .tablet .header-fixed
 	display: none
+.tablet 
+	.clients 
+		.clients-slide 
+			.slick-slide
+				margin: 0 20px
+	.header-mobile
+		display: block
+		position: relative
+		z-index: 1000
+	.header-mobile__main
+		background: #0c0c0c
+		color: #fff
+		height: 64px
+		padding: 23px 0 23px
+		text-align: right
+		.tel
+			color: #fdfdfd
+			+MONO-RGOMODULAR-Regular
+			font-size: 15px
+			font-weight: 400
+		.email
+			margin-right: 15px
+			color: #02a2db
+			+PFBeauSansPro-Bbook
+			font-size: 14px
+			font-weight: 300
+			&:after
+				top: -1px
+	.header-mobile-menu-link
+		color: #fff
+		float: left
+		font-size: 30px
+		left: -3px
+		position: relative
+		top: -5px
+	.header-mobile-menu
+		background: rgba(12,12,12,0.9)
+		display: none
+		left: 0
+		padding: 20px 5px 5px
+		position: absolute
+		right: 0
+		top: 100%
+		ul
+			li
+				width: 100%
+				text-align: center
+				padding: 20px 0
+				a
+					color: rgba(255,255,255,0.32)
+					+Roboto-Regular
+					font-size: 18px
+					font-weight: 400
+					-webkit-transition: all 0.2s ease-in
+					transition: all 0.2s ease-in
+					&:hover
+						color: #02a2db
+	.icon-mobile-apolo
+		height: 30px
+		width: 153px
+		background: url(../img/appollo_logo_tablet.svg) 0 0 no-repeat
+	.logo
+		display: inline-block
+		text-align: left
+		float: left
+		.icon, [class^="icon-"], [class*=" icon-"]
+			vertical-align: middle
+			margin-left: 5px
 .mobile
 	.header-mobile
 		display: block
-		position: fixed
-		left: 0
-		right: 0
-		top: 0
+		position: relative
 		z-index: 1000
+.mobile 
 	.header-mobile__main
+		background: #0c0c0c
+		color: #fff
 		height: 64px
-		background-color: #0c0c0c
+		padding: 23px 0 23px
+		text-align: right
+		.tel
+			color: #fdfdfd
+			+MONO-RGOMODULAR-Regular
+			font-size: 15px
+			font-weight: 400
+	.header-mobile-menu-link
+		color: #fff
+		float: left
+		font-size: 30px
+		left: -3px
+		position: relative
+		top: -5px
+	.header-mobile-menu
+		background: rgba(12,12,12,0.9)
+		display: none
+		left: 0
+		padding: 20px 5px 5px
+		position: absolute
+		right: 0
+		top: 100%
+		ul
+			li
+				width: 100%
+				text-align: center
+				padding: 20px 0
+				a
+					color: rgba(255,255,255,0.32)
+					+Roboto-Regular
+					font-size: 18px
+					font-weight: 400
+					-webkit-transition: all 0.2s ease-in
+					transition: all 0.2s ease-in
+					&:hover
+						color: #02a2db
+	.icon-mobile-apolo
+		height: 16px
+		width: 94px
+		background: url(../img/appollo_logo_phone.svg) 0 0 no-repeat
+	.logo
+		display: inline-block
+		text-align: left
+		float: left
+		.icon, [class^="icon-"], [class*=" icon-"]
+			vertical-align: middle
+			margin-left: 5px
+#sidenav-overlay
+	z-index: 10
++r(480)
+	.visible-on-small-only
+		display: none
+.mobile
+	.visible-on-small-only
+		display: block
+	.reviews 
+		.slick-list
+			margin: 0 30px
+		.slick-slide
+			padding: 20px 0 20px 0
+			p
+				font-size: 13px
+			.name
+				font-size: 16px
+			.role
+				font-size: 13px
+				line-height: 18px
+	.request 
+		padding: 20px 0 50px
+		p
+			padding: 20px 0 30px 0
+			font-size: 15px
+		.form
+			padding: 30px 12px 30px 12px
+		.l12
+			width: 100%
+		.input
+			max-width: 100%
+		.list 
+			.item 
+				.item__content
+					padding-top: 0
+					padding-left: 100px
+					.item__text
+						font-size: 13px
+					.item__name
+						font-size: 14px
+						line-height: 1
+						margin-bottom: 10px
+		.sm
+			font-size: 18px
+			display: inline-block
+			line-height: 20px
+		.h3
+			font-size: 22px
+	.portfolio 
+		padding: 30px 0
+		.h3
+			font-size: 22px
+		.sub-title
+			font-size: 15px
+			line-height: 20px
+		.card 
+			.info 
+				span
+					display: block
+					width: 100%
+					text-align: right
+	.header 
+		.header__bottom 
+			padding: 25px 0
+			.h1
+				line-height: 30px
+				text-align: center
+				margin-bottom: 20px
+			.sub-title
+				font-size: 16px
+				line-height: 22px
+				text-align: center
+			.but
+				width: 100%
+				text-align: center
+				.button
+					display: inline-block
+					float: initial
+					margin-top: 2rem
+	.clients
+		padding: 30px 0
+		.h3
+			font-size: 22px
+		.sub-title
+			font-size: 15px
+			line-height: 20px
+		.buttons
+			+rotate(90)
+			margin-top: 30px
+		.clients-slide 
+			.slick-slide
+				margin: 0 5px
+	.page-footer
+		.h3
+			font-size: 22px
+		.t40
+			margin-top: 15px
+	footer.page-footer 
+		p
+			font-size: 15px
+			margin: 15px 0
+.l12
+	width: 100%
+footer.page-footer.small
+	padding-top: 0
+.header.header-portfolio
+	.header__bottom
+		padding: 65px 0 47px 0
+		p
+			+Roboto-Regular
+			font-size: 16px
+			color: #a3a3a3
+			font-weight: 300
+			margin-top: 23px
+			span
+				display: inline-block
+				&:first-child
+					color: #fc291c
+					font-weight: 400
+				&:last-child
+					color: #fff

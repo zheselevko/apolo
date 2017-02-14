@@ -1,0 +1,593 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Template</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="theme-color" content="#fff">
+	<link rel="stylesheet" media="all" href="css/style.css" >
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="js/app.js"></script>
+
+<link href="/instashow/jquery.instashow.min.css" rel="stylesheet">
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDyMd5B7SbzqtGVqXuMNz7x0UrNHNe7T08&extension=.js"></script> 
+<script src="http://cdn.mapkit.io/v1/infobox.js"></script> 
+<link href="http://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet"> 
+<link href="http://cdn.mapkit.io/v1/infobox.css" rel="stylesheet" > 
+
+<script> 
+    google.maps.event.addDomListener(window, 'load', init);
+    var map, markersArray = [];
+
+    function bindInfoWindow(marker, map, location) {
+        google.maps.event.addListener(marker, 'click', function() {
+            function close(location) {
+                location.ib.close();
+                location.infoWindowVisible = false;
+                location.ib = null;
+            }
+
+            if (location.infoWindowVisible === true) {
+                close(location);
+            } else {
+                markersArray.forEach(function(loc, index){
+                    if (loc.ib && loc.ib !== null) {
+                        close(loc);
+                    }
+                });
+
+                var boxText = document.createElement('div');
+                boxText.style.cssText = 'background: #fff;';
+                boxText.classList.add('md-whiteframe-2dp');
+
+                function buildPieces(location, el, part, icon) {
+                    if (location[part] === '') {
+                        return '';
+                    } else if (location.iw[part]) {
+                        switch(el){
+                            case 'photo':
+                                if (location.photo){
+                                    return '<div class="iw-photo" style="background-image: url(' + location.photo + ');"></div>';
+                                 } else {
+                                    return '';
+                                }
+                                break;
+                            case 'iw-toolbar':
+                                return '<div class="iw-toolbar"><h3 class="md-subhead">' + location.title + '</h3></div>';
+                                break;
+                            case 'div':
+                                switch(part){
+                                    case 'email':
+                                        return '<div class="iw-details"><i class="material-icons" style="color:#4285f4;"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><span><a href="mailto:' + location.email + '" target="_blank">' + location.email + '</a></span></div>';
+                                        break;
+                                    case 'web':
+                                        return '<div class="iw-details"><i class="material-icons" style="color:#4285f4;"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><span><a href="' + location.web + '" target="_blank">' + location.web_formatted + '</a></span></div>';
+                                        break;
+                                    case 'desc':
+                                        return '<label class="iw-desc" for="cb_details"><input type="checkbox" id="cb_details"/><h3 class="iw-x-details">Details</h3><i class="material-icons toggle-open-details"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><p class="iw-x-details">' + location.desc + '</p></label>';
+                                        break;
+                                    default:
+                                        return '<div class="iw-details"><i class="material-icons"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><span>' + location[part] + '</span></div>';
+                                    break;
+                                }
+                                break;
+                            case 'open_hours':
+                                var items = '';
+                                for (var i = 0; i < location.open_hours.length; ++i) {
+                                    if (i !== 0){
+                                        items += '<li><strong>' + location.open_hours[i].day + '</strong><strong>' + location.open_hours[i].hours +'</strong></li>';
+                                    }
+                                    var first = '<li><label for="cb_hours"><input type="checkbox" id="cb_hours"/><strong>' + location.open_hours[0].day + '</strong><strong>' + location.open_hours[0].hours +'</strong><i class="material-icons toggle-open-hours"><img src="//cdn.mapkit.io/v1/icons/keyboard_arrow_down.svg"/></i><ul>' + items + '</ul></label></li>';
+                                }
+                                return '<div class="iw-list"><i class="material-icons first-material-icons" style="color:#4285f4;"><img src="//cdn.mapkit.io/v1/icons/' + icon + '.svg"/></i><ul>' + first + '</ul></div>';
+                                 break;
+                         }
+                    } else {
+                        return '';
+                    }
+                }
+
+                boxText.innerHTML = 
+                    buildPieces(location, 'photo', 'photo', '') +
+                    buildPieces(location, 'iw-toolbar', 'title', '') +
+                    buildPieces(location, 'div', 'address', 'location_on') +
+                    buildPieces(location, 'div', 'web', 'public') +
+                    buildPieces(location, 'div', 'email', 'email') +
+                    buildPieces(location, 'div', 'tel', 'phone') +
+                    buildPieces(location, 'div', 'int_tel', 'phone') +
+                    buildPieces(location, 'open_hours', 'open_hours', 'access_time') +
+                    buildPieces(location, 'div', 'desc', 'keyboard_arrow_down');
+
+                var myOptions = {
+                    alignBottom: true,
+                    content: boxText,
+                    disableAutoPan: true,
+                    maxWidth: 0,
+                    pixelOffset: new google.maps.Size(-140, -40),
+                    zIndex: null,
+                    boxStyle: {
+                        opacity: 1,
+                        width: '280px'
+                    },
+                    closeBoxMargin: '0px 0px 0px 0px',
+                    infoBoxClearance: new google.maps.Size(1, 1),
+                    isHidden: false,
+                    pane: 'floatPane',
+                    enableEventPropagation: false
+                };
+
+                location.ib = new InfoBox(myOptions);
+                location.ib.open(map, marker);
+                location.infoWindowVisible = true;
+            }
+        });
+    }
+
+    function init() {
+        var mapOptions = {
+            center: new google.maps.LatLng(55.801558643009784,41.64819970347594),
+            zoom: 4,
+            gestureHandling: 'auto',
+            fullscreenControl: false,
+            zoomControl: true,
+            disableDoubleClickZoom: true,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+                style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            },
+            scaleControl: true,
+            scrollwheel: true,
+            streetViewControl: true,
+            draggable : true,
+            clickableIcons: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            styles: [{"stylers":[{"visibility":"simplified"}]},{"stylers":[{"color":"#131314"}]},{"featureType":"water","stylers":[{"color":"#131313"},{"lightness":7}]},{"elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"lightness":25}]}]
+        }
+        var mapElement = document.getElementById('mapkit-8098');
+        var map = new google.maps.Map(mapElement, mapOptions);
+        var locations = [
+            {"title":"Советский пр., 43","address":"Советский пр., 43","tel":"8 (495) 205-52-25","int_tel":"","email":"info@appollopro.ru","web":"appollopro.ru","web_formatted":"appollopro.ru","open":"","time":"","lat":54.7295936,"lng":20.490252300000066,"vicinity":"Калининград","open_hours":"","marker":{"fillColor":"#F44336","fillOpacity":1,"strokeWeight":0,"scale":1.5,"path":"M10.2,9.6C4.5,9.6-0.1,14.3-0.1,20c0,5.7,10.3,12.1,10.3,16.6c0-4.5,10.3-10.9,10.3-16.6S15.9,9.6,10.2,9.6z M10.2,24.3c-2.4,0-4.4-2-4.4-4.4s2-4.4,4.4-4.4s4.4,2,4.4,4.4S12.6,24.3,10.2,24.3z","anchor":{"x":10,"y":30},"origin":{"x":0,"y":0},"style":2},"iw":{"address":true,"desc":true,"email":true,"enable":false,"int_tel":true,"open":true,"open_hours":true,"photo":true,"tel":true,"title":true,"web":true}},{"title":"ул. Верейская, 21","address":"ул. Верейская, 21","tel":"8 (495) 205-52-25","int_tel":"","email":"info@appollopro.ru","web":"appollopro.ru","web_formatted":"appollopro.ru","open":"","time":"","lat":55.7107497,"lng":37.44149170000003,"vicinity":"Западный административный округ","open_hours":"","marker":{"fillColor":"#F44336","fillOpacity":1,"strokeWeight":0,"scale":1.5,"path":"M10.2,9.6C4.5,9.6-0.1,14.3-0.1,20c0,5.7,10.3,12.1,10.3,16.6c0-4.5,10.3-10.9,10.3-16.6S15.9,9.6,10.2,9.6z M10.2,24.3c-2.4,0-4.4-2-4.4-4.4s2-4.4,4.4-4.4s4.4,2,4.4,4.4S12.6,24.3,10.2,24.3z","anchor":{"x":10,"y":30},"origin":{"x":0,"y":0},"style":2},"iw":{"address":true,"desc":true,"email":true,"enable":false,"int_tel":true,"open":true,"open_hours":true,"photo":true,"tel":true,"title":true,"web":true}}
+        ];
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                icon: locations[i].marker,
+                position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+                map: map,
+                title: locations[i].title,
+                address: locations[i].address,
+                desc: locations[i].desc,
+                tel: locations[i].tel,
+                int_tel: locations[i].int_tel,
+                vicinity: locations[i].vicinity,
+                open: locations[i].open,
+                open_hours: locations[i].open_hours,
+                photo: locations[i].photo,
+                time: locations[i].time,
+                email: locations[i].email,
+                web: locations[i].web,
+                iw: locations[i].iw
+            });
+            markersArray.push(marker);
+
+            if (locations[i].iw.enable === true){
+                bindInfoWindow(marker, map, locations[i]);
+            }
+        }
+    }
+</script>
+<style>
+    #mapkit-8098 {
+        height:750px;
+        width:100%;
+    }
+</style>
+
+</head>
+<body>
+<script>preloaderCSS3("Пожалуйста, подождите. Страница загружается");</script>
+<!-- BEGIN  out-->
+<div class="out">
+	<header class="header header-portfolio">
+		<div class="header__top">
+			<div class="container">
+				<div class="row">
+				<div class="col l3 s12 valign-wrapper">
+					<a href="" class="logo valign">
+						<i class="icon-logo"></i>
+					</a>
+				</div>
+				<div class="col l9 s12 hide-on-small-only">
+					<div class="row">
+					<div class="col l6">
+						<div class="row">
+							<div class="col l8">
+								<span class="category">HARDWARE</span>
+							</div>
+							<div class="col l4">
+								<span class="category-soft">SOFTWARE</span>
+							</div>
+						</div>
+					</div>
+					<div class="col l6">
+						<div class="row">
+							<div class="col l5"><a href="mailto:info@appollopro.ru" class="email nice-link">info@appollopro.ru</a></div>
+							<div class="col l7">
+								<a href="tel:+74952055225" class="tel">8 (495) 205-52-25</a>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="row">
+					<nav>
+	  <div class="nav-wrapper">
+						<ul>
+							<li><a href="#">Интерактивное <br>
+	оборудование</a></li>
+							<li><a href="#">Аренда <br>
+	оборудования</a></li>
+							<li><a href="#">Программное <br>
+	обеспечение</a></li>
+							<li><a href="/portfolio.html"><br>Портфолио</a></li>
+							<li><a href="#"><br>Поддержка</a></li>
+							<li><a href="#"><br>Контакты</a></li>
+						</ul>
+						</div>
+						</nav>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-fixed">
+			<div class="header-fixed__top">
+				<div class="container">
+					<div class="row">
+						<i class="header-menu-link material-icons">menu</i>
+						<div class="logo">
+							<a href=""><i class="icon-fix-apolo"></i></a>
+						</div>	
+						<div class="right">
+						<div class="col l12">
+							<a href="mailto:info@appollopro.ru" class="email nice-link">info@appollopro.ru</a>
+							<a href="tel:+74952055225" class="tel">8 (495) 205-52-25</a>
+						</div>
+							
+						</div>
+					</div>
+				</div>
+				</div>
+				<nav class="nav">
+				<div class="container">
+					<div class="row">
+						<div class="nav-wrapper">
+						<ul>
+							<li><a href="#">Интерактивное оборудование</a></li>
+							<li><a href="#">Аренда оборудования</a></li>
+							<li><a href="#">Программное обеспечение</a></li>
+							<li><a href="/portfolio.html">Портфолио</a></li>
+							<li><a href="#">Обслуживание</a></li>
+							<li><a href="#">Контакты</a></li>
+						</ul>
+					</div>
+					</div>
+				
+					
+					</div>
+				</nav>
+			
+		</div>
+		<div class="header-mobile">
+			<div class="header-mobile__main">
+				<div class="container">
+					<i class="material-icons header-mobile-menu-link">menu</i>
+					<div class="logo">
+							<a href=""><i class="icon-mobile-apolo"></i></a>
+						</div>	
+							<div class="col l12">
+							<a href="mailto:info@appollopro.ru" class="email nice-link hide-on-small-only">info@appollopro.ru</a>
+							<a href="tel:+74952055225" class="tel">8 (495) 205-52-25</a>
+						</div>
+				</div>
+			</div>
+			<div class="header-mobile-menu">
+			<div class="row">
+				<div class="col s12">
+					<ul class="header-mobile-menu-list">
+						<li><a href="#">Интерактивное оборудование</a></li>
+							<li><a href="#">Аренда оборудования</a></li>
+							<li><a href="#">Программное обеспечение</a></li>
+							<li><a href="/portfolio.html">Портфолио</a></li>
+							<li><a href="#">Обслуживание</a></li>
+							<li><a href="#">Контакты</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</div>
+	
+		<div class="header__bottom">
+			<div class="container">
+				<div class="row">
+					<span class="h1 animated fadeInLeft">
+						Портфолио
+					</span>
+					<p>Мы - <span>Appollo</span> <span>Digital</span>, команда специалистов в области интерактивных технологий, от программного обеспечения, до проектирования и реализации аппаратных решений. Наша компания предлагает комплексную реализацию проектов, что избавит вас от поиска других подрядчиков и сильно сэкономит Ваши ресурсы в процессе реализации вашего Проекта.</p>
+	
+	<p>Наша команда активно работает на Российском рынке около 5 лет с крупнейшими рекламными агентствами и брендами в области системной интерактивной интеграции. 90% процентов новых клиентов становятся нашими постоянными партнерами, что подтверждает наш правильный и индивидуальный подход к реализации проектов любого уровня сложности.</p>
+				</div>
+			</div>
+		</div>
+	  <img src="/img/portfolio-head.png" class="bgvideo" id="bgvideo" alt="">
+	</header>
+	<div class="portfolio">
+		<div class="container">
+			<div class="row">
+				<div class="col l9">
+					<span class="h3">Наши работы</span>
+					<p class="sub-title inner">Представлены кейсы, которые не проходят по договору NDA с клиентом. <br>
+	За полным портфолио обращайтесь к менеджерам</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col l4 s12">
+					<div class="card">
+						<div class="image">
+						<span class="hard">HARDWARE</span>
+						<span class="soft">SOFTWARE</span>
+							<img src="/img/card_2.png" alt="">
+						</div>
+						<div class="link">
+							<a href="#">Проектирование и монтаж оборудования Mercedes me Cafe</a>
+						</div>
+						<div class="info valign-wrapper">
+							<div class="brand-logo valign left col l7"><img src="/img/mer.png" alt=""></div>
+							<div class="date valign  col l5">
+							<span class="info-date right">Дата сдачи</span>
+							<span class="date right">10/02/15</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col l4 s12">
+					<div class="card">
+						<div class="image">
+						<span class="hard">HARDWARE</span>
+						<span class="soft">SOFTWARE</span>
+							<img src="/img/card_2.png" alt="">
+						</div>
+						<div class="link">
+							<a href="#">Оснащение Digital Showroom для Jaguar и Land Rover</a>
+						</div>
+						<div class="info valign-wrapper">
+							<div class="brand-logo valign left col l7"><img src="/img/land.png" alt=""></div>
+							<div class="date valign  col l5">
+							<span class="info-date right">Дата сдачи</span>
+							<span class="date right">10/02/15</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col l4 s12">
+					<div class="card">
+					<div class="image">
+					<span class="hard">HARDWARE</span>
+						<span class="soft">SOFTWARE</span>
+						<a class="rm-mag-embed" href="http://cases.appollopro.ru/625729" data-uri="625729"  data-width="responsive"  data-domain="http://cases.appollopro.ru"  target="_blank">http://cases.appollopro.ru/625729</a>
+	<script async src="https://readymag.com/specials/assets/embed_init.js" id="readymag-embed-init"></script>
+					</div>
+						<div class="link">
+							<a href="">Digital оснащение стенда Fanta для новой «Fanta Цитрус»</a>
+						</div>
+						<div class="info valign-wrapper">
+							<div class="brand-logo valign left col l7"><img src="/img/cola.png" alt=""></div>
+							<div class="date valign  col l5">
+							<span class="info-date right">Дата сдачи</span>
+							<span class="date right">10/02/15</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+	
+			</div>
+		<div class="row">
+				<div class="col l4 s12">
+					<div class="card">
+						<div class="image">
+						<span class="hard">HARDWARE</span>
+						<span class="soft">SOFTWARE</span>
+							<img src="/img/card_2.png" alt="">
+						</div>
+						<div class="link">
+							<a href="#">Проектирование и монтаж оборудования Mercedes me Cafe</a>
+						</div>
+						<div class="info valign-wrapper">
+							<div class="brand-logo valign left col l7"><img src="/img/mer.png" alt=""></div>
+							<div class="date valign  col l5">
+							<span class="info-date right">Дата сдачи</span>
+							<span class="date right">10/02/15</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col l4 s12">
+					<div class="card">
+						<div class="image">
+						<span class="hard">HARDWARE</span>
+						<span class="soft">SOFTWARE</span>
+							<img src="/img/card_2.png" alt="">
+						</div>
+						<div class="link">
+							<a href="#">Оснащение Digital Showroom для Jaguar и Land Rover</a>
+						</div>
+						<div class="info valign-wrapper">
+							<div class="brand-logo valign left col l7"><img src="/img/land.png" alt=""></div>
+							<div class="date valign  col l5">
+							<span class="info-date right">Дата сдачи</span>
+							<span class="date right">10/02/15</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col l4 s12">
+					<div class="card">
+					<div class="image">
+					<span class="hard">HARDWARE</span>
+						<span class="soft">SOFTWARE</span>
+						<a class="rm-mag-embed" href="http://cases.appollopro.ru/625729" data-uri="625729"  data-width="responsive"  data-domain="http://cases.appollopro.ru"  target="_blank">http://cases.appollopro.ru/625729</a>
+	<script async src="https://readymag.com/specials/assets/embed_init.js" id="readymag-embed-init"></script>
+					</div>
+						<div class="link">
+							<a href="">Digital оснащение стенда Fanta для новой «Fanta Цитрус»</a>
+						</div>
+						<div class="info valign-wrapper">
+							<div class="brand-logo valign left col l7"><img src="/img/cola.png" alt=""></div>
+							<div class="date valign  col l5">
+							<span class="info-date right">Дата сдачи</span>
+							<span class="date right">10/02/15</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+	
+			</div>
+			<div class="col l3 center-align visible-on-small-only hide-on-med-only hide-on-large-only">
+					<a class="btn btn-large" href="#">Перейти в портфолио</a>
+				</div>
+		</div>
+	</div>
+	<div class="request">
+		<div class="container">
+			<div class="row">
+				<div class="col l7">
+					<span class="h3">
+						Сотрудничество
+					</span>
+					<p>
+						Процесс начинается с выяснения задач клиента. Оставьте заявку <br>
+	и наш менеджер свяжется с вами
+					</p>
+					<span class="h3 sm">
+						Мы работаем:
+					</span>
+					<div class="list">
+						<div class="item">
+						<i class="icon-agency_icon"></i>
+							<div class="item__content">
+								<div class="item__name">
+									C агенствами
+								</div>
+								<div class="item__text">
+									Управление брендом, на первый взгляд, концентрирует <br> потребительский рынок, работая над проектом.
+								</div>
+							</div>
+						</div>
+						<div class="item">
+						<i class="icon-production_icon"></i>
+							<div class="item__content">
+								<div class="item__name">
+									C продакшн студиями
+								</div>
+								<div class="item__text">
+									Практика однозначно показывает, что воздействие на<br> потребителя консолидирует медийный канал.
+								</div>
+							</div>
+						</div>
+						<div class="item">
+						<i class="icon-client_icon"></i>
+							<div class="item__content">
+								<div class="item__name">
+									Напрямую с клиентами
+								</div>
+								<div class="item__text">
+									Маркетингово-ориентированное издание подсознательно<br> допускает конвергентный системный анализ.
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col l5">
+					<div class="form">
+						<span class="h3 center">
+							Оставьте заявку
+						</span>
+						  <div class="row">
+	    <form action="#">
+	        <div class="col l12">
+	        	<span class="input input--kohana">
+						<input class="input__field input__field--kohana" type="text" id="input-29" />
+						<label class="input__label input__label--kohana" for="input-29">
+							  <i class="icon-user_icon icon icon--kohana"></i>
+							<span class="input__label-content input__label-content--kohana">Имя</span>
+						</label>
+					</span>
+	        </div>
+	        <div class="col l12">
+	             	<span class="input input--kohana">
+						<input class="input__field input__field--kohana" type="text" id="input-29" />
+						<label class="input__label input__label--kohana" for="input-29">
+							  <i class="icon-phone_icon icon icon--kohana"></i>
+							<span class="input__label-content input__label-content--kohana">Номер телефона</span>
+						</label>
+					</span>
+	        </div>
+	        <div class="col l12">
+	          	<span class="input input--kohana">
+						<input class="input__field input__field--kohana" type="text" id="input-29" />
+						<label class="input__label input__label--kohana" for="input-29">
+							  <i class="icon-mail_icon icon icon--kohana"></i>
+							<span class="input__label-content input__label-content--kohana">E-mail адрес</span>
+						</label>
+					</span>
+	        </div>
+	         <div class="col l12">
+	         <span class="input">
+	         	  <textarea name="comment"  id="input-30" cols="30" rows="10" placeholder="Описание"></textarea>
+	         
+	         </span>
+	        
+	        </div>
+	        <div class="col l12">
+	        <span class="input">
+	          <button type="submit" class="button button--wapasha button--round-l button--text-thick button--inverted" >Оставьте заявку </button>
+	          </span>
+	        </div>
+	    </form>
+	  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="map">
+		<div id='mapkit-8098'></div>
+	</div>
+</div>
+<!-- END out-->
+<!-- BEGIN footer -->
+ <!-- BEGIN page-footer -->
+ <footer class="page-footer small">
+ <!-- BEGIN footer-copyright -->
+  	 <div class="footer-copyright">
+             <div class="container">
+          <a href="/" class="left">
+          	<img src="/img/logo-footer.png" alt="">
+          </a>
+             <span class="right">
+             	2014-2017
+             </span>
+             </div>
+           </div>
+  	<!-- END footer-copyright -->
+ </footer>
+ <!-- END page-footer -->
+<!-- END footer -->
+
+	<script src="/instashow/jquery.instashow.packaged.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.runtime.min.js"></script>
+<script src="/instashow/jquery.instashow.min.js"></script>
+</body>
+</html>
